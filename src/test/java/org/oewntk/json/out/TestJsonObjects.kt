@@ -73,6 +73,7 @@ class TestJsonObjects {
 
         private val ps = if (!System.getProperties().containsKey("SILENT")) Tracing.psInfo else Tracing.psNull
 
+        @Suppress("EmptyMethod")
         @JvmStatic
         @BeforeClass
         fun init() {
