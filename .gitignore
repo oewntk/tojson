@@ -1,0 +1,7 @@
+/target/
+
+/json/
+/json311/
+**/_*/
+**/_*
+/dependency-reduced-pom.xml
