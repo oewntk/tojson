@@ -3,9 +3,8 @@
  */
 package org.oewntk.json.out
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.oewntk.model.DataModel
+import org.oewntk.json.out.Serializer.prettyPrintModel
+import org.oewntk.json.out.Serializer.serializeModel
 import org.oewntk.model.Model
 import java.io.File
 import java.io.IOException
@@ -17,19 +16,14 @@ import java.util.function.Consumer
  * @property file output file
  * @author Bernard Bou
  */
-class ModelConsumer(private val file: File) : Consumer<Model> {
-
-    private fun serializeCoreModel(model: Model, file: File) {
-        val jsonString = Json.encodeToString(DataModel(model))
-        println(jsonString)
-        file.writeText(jsonString)
-        // throw NotImplementedError()
-    }
+class ModelConsumer(private val file: File, private val prettyPrint: Boolean = false) : Consumer<Model> {
 
     override fun accept(model: Model) {
         Tracing.psInfo.printf("[Model] %s%n", model.sources.contentToString())
         try {
-            serializeCoreModel(model, file)
+            val jsoned = if (prettyPrint) prettyPrintModel(model) else serializeModel(model)
+            file.writeText(jsoned)
+
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }

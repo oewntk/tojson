@@ -3,8 +3,6 @@
  */
 package org.oewntk.json.out
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.model.*
@@ -44,29 +42,36 @@ class TestJsonObjects {
     @Test
     fun testLex() {
 
-        val jsonString = Json.encodeToString(lex)
-        println(jsonString)
+        val jsonString = Serializer.prettyPrintLex(lex)
+        ps.println(jsonString)
     }
 
     @Test
     fun testLex2() {
 
-        val jsonString = Json.encodeToString(lex2)
-        println(jsonString)
+        val jsonString = Serializer.prettyPrintLex(lex2)
+        ps.println(jsonString)
     }
 
     @Test
     fun testSense() {
 
-        val jsonString = Json.encodeToString(sense)
-        println(jsonString)
+        val jsonString = Serializer.prettyPrintSense(sense)
+        ps.println(jsonString)
+    }
+
+    @Test
+    fun testSense2() {
+
+        val jsonString = Serializer.prettyPrintSense(sense2)
+        ps.println(jsonString)
     }
 
     @Test
     fun testSynset() {
 
-        val jsonString = Json.encodeToString(synset)
-        println(jsonString)
+        val jsonString = Serializer.prettyPrintSynset(synset)
+        ps.println(jsonString)
     }
 
     companion object {
