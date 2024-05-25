@@ -7,7 +7,7 @@
 
   <groupId>io.github.oewntk</groupId>
   <artifactId>tojson</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
   <name>to_json</name>
   <description>Serialize Wordnet model to JSON file.</description>
   <url>https://github.com/oewntk/tojson</url>
@@ -29,7 +29,7 @@
     <dependency>
       <groupId>io.github.oewntk</groupId>
       <artifactId>model</artifactId>
-      <version>2.1.0</version>
+      <version>2.1.1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
