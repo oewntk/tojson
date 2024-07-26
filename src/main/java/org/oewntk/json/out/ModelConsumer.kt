@@ -3,6 +3,7 @@
  */
 package org.oewntk.json.out
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.oewntk.model.DataModel
@@ -15,12 +16,21 @@ import java.util.function.Consumer
  * Main class that serializes the model
  *
  * @property file output file
+ * @param prettyPrintFlag pretty print output
  * @author Bernard Bou
  */
-class ModelConsumer(private val file: File) : Consumer<Model> {
+class ModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : Consumer<Model> {
+
+    @OptIn(ExperimentalSerializationApi::class)
+    val json = Json {
+        if (prettyPrintFlag) {
+            prettyPrint = true
+            prettyPrintIndent = "  " // default is 4 spaces
+        }
+    }
 
     private fun serializeCoreModel(model: Model, file: File) {
-        val jsonString = Json.encodeToString(DataModel(model))
+        val jsonString = json.encodeToString(DataModel(model))
         println(jsonString)
         file.writeText(jsonString)
         // throw NotImplementedError()

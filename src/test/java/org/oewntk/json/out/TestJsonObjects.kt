@@ -3,6 +3,7 @@
  */
 package org.oewntk.json.out
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
@@ -44,34 +45,40 @@ class TestJsonObjects {
     @Test
     fun testLex() {
 
-        val jsonString = Json.encodeToString(lex)
+        val jsonString = json.encodeToString(lex)
         println(jsonString)
     }
 
     @Test
     fun testLex2() {
 
-        val jsonString = Json.encodeToString(lex2)
+        val jsonString = json.encodeToString(lex2)
         println(jsonString)
     }
 
     @Test
     fun testSense() {
 
-        val jsonString = Json.encodeToString(sense)
+        val jsonString = json.encodeToString(sense)
         println(jsonString)
     }
 
     @Test
     fun testSynset() {
 
-        val jsonString = Json.encodeToString(synset)
+        val jsonString = json.encodeToString(synset)
         println(jsonString)
     }
 
     companion object {
 
         private val ps = if (!System.getProperties().containsKey("SILENT")) Tracing.psInfo else Tracing.psNull
+
+        @OptIn(ExperimentalSerializationApi::class)
+        val json = Json {
+            prettyPrint = true
+            prettyPrintIndent = "  " // Optional: Customize indentation (default is 4 spaces)
+        }
 
         @Suppress("EmptyMethod")
         @JvmStatic
