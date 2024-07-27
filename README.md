@@ -19,4 +19,4 @@ Project [tojson](https://github.com/oewntk/tojson)
 
 		<groupId>io.github.oewntk</groupId>
 		<artifactId>tojson</artifactId>
-		<version>1.0.0</version>
+		<version>2.1.2</version>
