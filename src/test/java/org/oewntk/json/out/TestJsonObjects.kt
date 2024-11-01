@@ -35,6 +35,7 @@ class TestJsonObjects {
 
     private val sense = Sense(sk1, lex, 'n', 0, synset.synsetId)
 
+    @Suppress("unused")
     private val sense2 = Sense(sk2, lex, 'n', 0, synset.synsetId)
 
     init {
@@ -72,6 +73,7 @@ class TestJsonObjects {
 
     companion object {
 
+        @Suppress("unused")
         private val ps = if (!System.getProperties().containsKey("SILENT")) Tracing.psInfo else Tracing.psNull
 
         @OptIn(ExperimentalSerializationApi::class)

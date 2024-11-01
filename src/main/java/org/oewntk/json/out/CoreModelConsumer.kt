@@ -19,6 +19,7 @@ import java.util.function.Consumer
  * @param prettyPrintFlag pretty print output
  * @author Bernard Bou
  */
+@Suppress("unused")
 class CoreModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : Consumer<CoreModel> {
 
     @OptIn(ExperimentalSerializationApi::class)
