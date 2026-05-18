@@ -32,9 +32,7 @@ class CoreModelConsumer(private val file: File, prettyPrintFlag: Boolean = false
 
     private fun serializeCoreModel(model: CoreModel, file: File) {
         val jsonString = json.encodeToString(DataCoreModel(model))
-        println(jsonString)
         file.writeText(jsonString)
-        //throw NotImplementedError()
     }
 
     override fun accept(model: CoreModel) {

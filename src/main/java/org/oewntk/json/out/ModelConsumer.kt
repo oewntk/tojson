@@ -31,9 +31,7 @@ class ModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : 
 
     private fun serializeCoreModel(model: Model, file: File) {
         val jsonString = json.encodeToString(DataModel(model))
-        // println(jsonString)
         file.writeText(jsonString)
-        // throw NotImplementedError()
     }
 
     override fun accept(model: Model) {
