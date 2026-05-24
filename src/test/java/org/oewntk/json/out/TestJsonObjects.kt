@@ -23,7 +23,7 @@ class TestJsonObjects {
 
     private val synset = Synset(
         "77777777-n",
-        'n',
+        SynsetType.N,
         "domain",
         arrayOf(lemma, lemma2),
         arrayOf("definition", "definition2"),
@@ -33,10 +33,10 @@ class TestJsonObjects {
 
     private val lex2 = Lex(lemma, "n-2")
 
-    private val sense = Sense(sk1, lex, 'n', 0, synset.synsetId)
+    private val sense = Sense(sk1, lex, SynsetType.N, 0, synset.synsetId)
 
     @Suppress("unused")
-    private val sense2 = Sense(sk2, lex, 'n', 0, synset.synsetId)
+    private val sense2 = Sense(sk2, lex, SynsetType.N, 0, synset.synsetId)
 
     init {
         lex.apply { senseKeys = mutableListOf() }
