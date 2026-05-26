@@ -37,6 +37,10 @@ class CoreModelConsumer(private val file: File, prettyPrintFlag: Boolean = false
 
     override fun accept(model: CoreModel) {
         Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
+        val outDir =  file.parentFile
+        if (!outDir.exists()) {
+            outDir.mkdirs()
+        }
         try {
             serializeCoreModel(model, file)
         } catch (e: IOException) {

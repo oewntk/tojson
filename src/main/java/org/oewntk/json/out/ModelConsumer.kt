@@ -36,6 +36,10 @@ class ModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : 
 
     override fun accept(model: Model) {
         Tracing.psInfo.printf("[Model] %s%n", model.sources.contentToString())
+        val outDir =  file.parentFile
+        if (!outDir.exists()) {
+            outDir.mkdirs()
+        }
         try {
             serializeCoreModel(model, file)
         } catch (e: IOException) {
