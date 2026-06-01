@@ -47,28 +47,28 @@ class TestJsonObjects {
     fun testLex() {
 
         val jsonString = json.encodeToString(lex)
-        println(jsonString)
+        ps.println(jsonString)
     }
 
     @Test
     fun testLex2() {
 
         val jsonString = json.encodeToString(lex2)
-        println(jsonString)
+        ps.println(jsonString)
     }
 
     @Test
     fun testSense() {
 
         val jsonString = json.encodeToString(sense)
-        println(jsonString)
+        ps.println(jsonString)
     }
 
     @Test
     fun testSynset() {
 
         val jsonString = json.encodeToString(synset)
-        println(jsonString)
+        ps.println(jsonString)
     }
 
     companion object {
