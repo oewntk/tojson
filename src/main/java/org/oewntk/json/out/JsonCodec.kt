@@ -17,4 +17,8 @@ class JsonCodec(prettyPrintFlag: Boolean = true) {
     fun encodeToString(value: Any): String {
         return delegate.encodeToString(SerializableWrapper.serializer(), SerializableWrapper(value))
     }
+
+    fun decodeString(str: String): Any {
+        return delegate.decodeFromString(SerializableWrapper.serializer(), str).data
+    }
 }
