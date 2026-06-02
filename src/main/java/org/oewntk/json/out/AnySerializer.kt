@@ -51,6 +51,12 @@ object AnySerializer : KSerializer<Any> {
             is List<*> -> buildJsonArray {
                 forEach { add(it.toJsonElement()) }
             }
+            is Array<*> -> buildJsonArray {
+                forEach { add(it.toJsonElement()) }
+            }
+            is Set<*> -> buildJsonArray {
+                forEach { add(it.toJsonElement()) }
+            }
             is Number -> JsonPrimitive(this)
             is Boolean -> JsonPrimitive(this)
             is String -> JsonPrimitive(this)
