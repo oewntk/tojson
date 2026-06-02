@@ -26,12 +26,12 @@ class TestJsonModelDataSerialize {
     @Test
     fun testModelSerialization() {
         val (someLexes, someSynsets, someSenses) = model.subset()
-        val dataLexes = KSData(someLexes.lexesDataSerialize())
-        val dataSynsets = KSData(someSynsets.synsetsDataSerialize())
-        val dataSenses = KSData(someSenses.sensesDataSerialize())
-        val jsonLexesString = json.encodeToString(KSData.serializer(), dataLexes)
-        val jsonSynsetsString = json.encodeToString(KSData.serializer(), dataSynsets)
-        val jsonSensesString = json.encodeToString(KSData.serializer(), dataSenses)
+        val dataLexes = someLexes.lexesDataSerialize()
+        val dataSynsets = someSynsets.synsetsDataSerialize()
+        val dataSenses = someSenses.sensesDataSerialize()
+        val jsonLexesString = json.encodeToString(KSData.serializer(), KSData(dataLexes))
+        val jsonSynsetsString = json.encodeToString(KSData.serializer(), KSData(dataSynsets))
+        val jsonSensesString = json.encodeToString(KSData.serializer(), KSData(dataSenses))
         ps.println(jsonLexesString)
         ps.println(jsonSynsetsString)
         ps.println(jsonSensesString)

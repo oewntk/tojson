@@ -1,7 +1,6 @@
 package org.oewntk.json.out
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.oewntk.model.CoreModel
 import org.oewntk.model.dataSerialize
@@ -31,9 +30,9 @@ class CoreModelDataConsumer(
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.dataSerialize()
-        val lexContent = json.encodeToString(dataLexes)
-        val synsetContent = json.encodeToString(dataSynsets)
-        val senseContent = json.encodeToString(dataSenses)
+        val lexContent = json.encodeToString(KSData.serializer(), KSData(dataLexes))
+        val synsetContent = json.encodeToString(KSData.serializer(), KSData(dataSynsets))
+        val senseContent = json.encodeToString(KSData.serializer(), KSData(dataSenses))
         if (split) {
             var file = File(dir, "oewn-synsets.json")
             Tracing.psInfo.printf("[File] %s%n", file)

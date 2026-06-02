@@ -27,7 +27,7 @@ class TestJsonModelSerialize {
     fun testModelSerialization() {
         val serialized: Sequence<Pair<SData, Filename>> = genModelSerializables(model)
         serialized.forEach { (sdata: SData, _: Filename) ->
-            val jsonString = json.encodeToString(sdata)
+            val jsonString = json.encodeToString(KSData.serializer(), KSData(sdata))
             ps.println(jsonString)
         }
     }
