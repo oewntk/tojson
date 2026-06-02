@@ -3,7 +3,7 @@ package org.oewntk.json.out
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.oewntk.model.CoreModel
-import org.oewntk.model.dataSerialize
+import org.oewntk.model.toData
 import java.io.File
 import java.io.IOException
 import java.util.function.Consumer
@@ -29,7 +29,7 @@ class CoreModelDataConsumer(
     }
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
-        val (dataLexes, dataSynsets, dataSenses) = model.dataSerialize()
+        val (dataLexes, dataSynsets, dataSenses) = model.toData()
         val lexContent = json.encodeToString(KSData.serializer(), KSData(dataLexes))
         val synsetContent = json.encodeToString(KSData.serializer(), KSData(dataSynsets))
         val senseContent = json.encodeToString(KSData.serializer(), KSData(dataSenses))

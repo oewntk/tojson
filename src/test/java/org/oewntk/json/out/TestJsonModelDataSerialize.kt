@@ -8,9 +8,9 @@ import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.model.LibModelSubset.subset
-import org.oewntk.model.lexesDataSerialize
-import org.oewntk.model.sensesDataSerialize
-import org.oewntk.model.synsetsDataSerialize
+import org.oewntk.model.toLexesData
+import org.oewntk.model.toSensesData
+import org.oewntk.model.toSynsetsData
 import org.oewntk.ser.`in`.LibTestsSerCommon.checkOrig
 import org.oewntk.ser.`in`.LibTestsSerCommon.model
 import org.oewntk.ser.`in`.LibTestsSerCommon.ps
@@ -26,9 +26,9 @@ class TestJsonModelDataSerialize {
     @Test
     fun testModelSerialization() {
         val (someLexes, someSynsets, someSenses) = model.subset()
-        val dataLexes = someLexes.lexesDataSerialize()
-        val dataSynsets = someSynsets.synsetsDataSerialize()
-        val dataSenses = someSenses.sensesDataSerialize()
+        val dataLexes = someLexes.toLexesData()
+        val dataSynsets = someSynsets.toSynsetsData()
+        val dataSenses = someSenses.toSensesData()
         val jsonLexesString = json.encodeToString(KSData.serializer(), KSData(dataLexes))
         val jsonSynsetsString = json.encodeToString(KSData.serializer(), KSData(dataSynsets))
         val jsonSensesString = json.encodeToString(KSData.serializer(), KSData(dataSenses))
