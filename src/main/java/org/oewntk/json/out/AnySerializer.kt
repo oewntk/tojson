@@ -18,7 +18,7 @@ import kotlin.collections.map
 import kotlin.collections.mapValues
 
 @kotlinx.serialization.Serializable
-data class KSData(val sdata: Map<String, @kotlinx.serialization.Serializable(with = AnySerializer::class) Any>)
+data class KSData(val data: Map<String, @kotlinx.serialization.Serializable(with = AnySerializer::class) Any>)
 
 object AnySerializer : KSerializer<Any> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Any")

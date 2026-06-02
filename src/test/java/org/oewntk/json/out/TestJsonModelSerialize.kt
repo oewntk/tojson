@@ -4,13 +4,11 @@
 package org.oewntk.json.out
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.model.Filename
 import org.oewntk.model.LibTestGen.genModelSerializables
-import org.oewntk.model.SData
 import org.oewntk.ser.`in`.LibTestsSerCommon.checkOrig
 import org.oewntk.ser.`in`.LibTestsSerCommon.model
 import org.oewntk.ser.`in`.LibTestsSerCommon.ps
@@ -25,9 +23,9 @@ class TestJsonModelSerialize {
 
     @Test
     fun testModelSerialization() {
-        val serialized: Sequence<Pair<SData, Filename>> = genModelSerializables(model)
-        serialized.forEach { (sdata: SData, _: Filename) ->
-            val jsonString = json.encodeToString(KSData.serializer(), KSData(sdata))
+        val serialized: Sequence<Pair<Map<String, Any>, Filename>> = genModelSerializables(model)
+        serialized.forEach { (data: Map<String, Any>, _: Filename) ->
+            val jsonString = json.encodeToString(KSData.serializer(), KSData(data))
             ps.println(jsonString)
         }
     }
