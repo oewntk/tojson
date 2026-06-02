@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2021-2024. Bernard Bou.
- */
 package org.oewntk.json.out
 
 import kotlinx.serialization.ExperimentalSerializationApi
