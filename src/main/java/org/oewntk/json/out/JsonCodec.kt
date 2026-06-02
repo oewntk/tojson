@@ -14,7 +14,7 @@ class JsonCodec(prettyPrintFlag: Boolean = true) {
         }
     }
 
-    fun <T: Map<String,Any>> encodeToString(value: T): String {
+    fun encodeToString(value: Any): String {
         return delegate.encodeToString(SerializableWrapper.serializer(), SerializableWrapper(value))
     }
 }
