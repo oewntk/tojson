@@ -3,9 +3,6 @@
  */
 package org.oewntk.json.out
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.model.*
@@ -20,17 +17,13 @@ import kotlin.test.assertEquals
 
 class TestJsonObjects {
 
-    @OptIn(ExperimentalSerializationApi::class)
-    val json = Json {
-        prettyPrint = true
-        prettyPrintIndent = "  " // Optional: Customize indentation (default is 4 spaces)
-    }
+    val json = JsonCodec(prettyPrintFlag = true)
 
     @Test
     fun testDummyEmptyLex() {
         val lex = Lex("jest", "n").apply { senseKeys = mutableListOf() }
         val serializable: Map<String, Any> = lex.toOEWNData(model.senseResolver)
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
+        val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
     }
 
@@ -38,7 +31,7 @@ class TestJsonObjects {
     fun testDummyLex() {
         val lex = Lex("jest", "n", listOf("jest%1:10:00::", "jest%1:04:00::"))
         val serializable: Map<String, Any> = lex.toOEWNData(model.senseResolver)
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
+        val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
     }
 
@@ -52,7 +45,7 @@ class TestJsonObjects {
             arrayOf("definition", "definition2"),
         )
         val serializable: Map<String, Any> = synset.toOEWNData()
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
+        val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
     }
 
@@ -60,7 +53,7 @@ class TestJsonObjects {
     fun testSense() {
         val sense = model.senseResolver("jest%1:10:00::")
         val serializable: Map<String, Any> = sense.toOEWNData()
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
+        val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
     }
 
@@ -70,7 +63,7 @@ class TestJsonObjects {
             .map(model.senseResolver)
             .asSequence()
         val serializables: Sequence<Map<String, Any>> = someSenses.map { it.toOEWNData() }
-        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(KSData.serializer(), KSData(it)) }
+        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         ps.println(jsonStrings.joinToString("\n\n"))
     }
 
@@ -78,7 +71,7 @@ class TestJsonObjects {
     fun testSynset() {
         val synset: Synset = model.synsetResolver("05042508-n")
         val serializable: Map<String, Any> = synset.toOEWNData()
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
+        val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
     }
 
@@ -88,7 +81,7 @@ class TestJsonObjects {
             .map(model.synsetResolver)
             .asSequence()
         val serializables: Sequence<Map<String, Any>> = someSynsets.map { it.toOEWNData() }
-        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(KSData.serializer(), KSData(it)) }
+        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         ps.println(jsonStrings.joinToString("\n\n"))
     }
 
@@ -96,7 +89,7 @@ class TestJsonObjects {
     fun testRandomSynsets() {
         val someSynsets: Sequence<Synset> = model.synsetSubset()
         val serializables: Sequence<Map<String, Any>> = someSynsets.map { it.toOEWNData() }
-        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(KSData.serializer(), KSData(it)) }
+        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         ps.println(jsonStrings.joinToString("\n\n"))
     }
 
@@ -104,7 +97,7 @@ class TestJsonObjects {
     fun testLex() {
         val lex: Lex = model.lexResolver1("jest", "n")
         val serializable: Map<String, Any> = lex.toOEWNData(model.senseResolver)
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
+        val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
     }
 
@@ -114,7 +107,7 @@ class TestJsonObjects {
             .flatMap(model.lexResolver)
             .asSequence()
         val serializables: Sequence<Map<String, Any>> = someLexes.map { it.toOEWNData(model.senseResolver) }
-        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(KSData.serializer(), KSData(it)) }
+        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         ps.println(jsonStrings.joinToString("\n\n"))
     }
 
@@ -122,7 +115,7 @@ class TestJsonObjects {
     fun testRandomLexes() {
         val someLexes: Sequence<Lex> = model.lexSubset()
         val serializables: Sequence<Map<String, Any>> = someLexes.map { it.toOEWNData(model.senseResolver) }
-        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(KSData.serializer(), KSData(it)) }
+        val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         ps.println(jsonStrings.joinToString("\n\n"))
     }
 
@@ -131,16 +124,16 @@ class TestJsonObjects {
         val someLexes: Sequence<Lex> = model.lexSubset(howMany = 5)
         val map: HyperMap1 = someLexes.lexByLemmaThenByKey2()
         val serializedMap: Map<Lemma, Any> = map.toOEWNData(model.senseResolver)
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializedMap))
+        val jsonString = json.encodeToString(serializedMap)
         ps.println(jsonString)
     }
 
     @Test
     fun testSomeSynsetsBySynsetId() {
         val someSynsets: Sequence<Synset> = model.synsetSubset(howMany = 5)
-        val map: Map<SynsetId,Synset> = someSynsets.synsetsById()
+        val map: Map<SynsetId, Synset> = someSynsets.synsetsById()
         val serializedMap: Map<SynsetId, Any> = map.toOEWNData()
-        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializedMap))
+        val jsonString = json.encodeToString(serializedMap)
         ps.println(jsonString)
     }
 

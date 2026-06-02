@@ -3,8 +3,6 @@
  */
 package org.oewntk.json.out
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.model.Filename
@@ -15,17 +13,13 @@ import org.oewntk.ser.`in`.LibTestsSerCommon.ps
 
 class TestJsonModelSerialize {
 
-    @OptIn(ExperimentalSerializationApi::class)
-    val json = Json {
-        prettyPrint = true
-        prettyPrintIndent = "  " // Optional: Customize indentation (default is 4 spaces)
-    }
+    val json = JsonCodec(prettyPrintFlag = true)
 
     @Test
     fun testModelSerialization() {
         val serialized: Sequence<Pair<Map<String, Any>, Filename>> = genModelSerializables(model)
         serialized.forEach { (data: Map<String, Any>, _: Filename) ->
-            val jsonString = json.encodeToString(KSData.serializer(), KSData(data))
+            val jsonString = json.encodeToString(data)
             ps.println(jsonString)
         }
     }

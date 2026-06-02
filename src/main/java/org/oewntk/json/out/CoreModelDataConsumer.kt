@@ -1,7 +1,5 @@
 package org.oewntk.json.out
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
 import org.oewntk.model.CoreModel
 import org.oewntk.model.toData
 import java.io.File
@@ -20,19 +18,13 @@ class CoreModelDataConsumer(
     prettyPrintFlag: Boolean = true
 ) : Consumer<CoreModel> {
 
-    @OptIn(ExperimentalSerializationApi::class)
-    val json = Json {
-        if (prettyPrintFlag) {
-            prettyPrint = true
-            prettyPrintIndent = "  " // default is 4 spaces
-        }
-    }
+    val json = JsonCodec(prettyPrintFlag = prettyPrintFlag)
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.toData()
-        val lexContent = json.encodeToString(KSData.serializer(), KSData(dataLexes))
-        val synsetContent = json.encodeToString(KSData.serializer(), KSData(dataSynsets))
-        val senseContent = json.encodeToString(KSData.serializer(), KSData(dataSenses))
+        val lexContent = json.encodeToString(dataLexes)
+        val synsetContent = json.encodeToString(dataSynsets)
+        val senseContent = json.encodeToString(dataSenses)
         if (split) {
             var file = File(dir, "oewn-synsets.json")
             Tracing.psInfo.printf("[File] %s%n", file)
