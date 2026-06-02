@@ -15,7 +15,7 @@ import org.oewntk.ser.`in`.LibTestsSerCommon.checkOrig
 import org.oewntk.ser.`in`.LibTestsSerCommon.model
 import org.oewntk.ser.`in`.LibTestsSerCommon.ps
 
-class TestYamlModelSerialize {
+class TestJsonModelSerialize {
 
     @OptIn(ExperimentalSerializationApi::class)
     val json = Json {
@@ -27,8 +27,8 @@ class TestYamlModelSerialize {
     fun testModelSerialization() {
         val serialized: Sequence<Pair<SData, Filename>> = genModelSerializables(model)
         serialized.forEach { (sdata: SData, _: Filename) ->
-            val yamlString = json.encodeToString(sdata)
-            ps.println(yamlString)
+            val jsonString = json.encodeToString(sdata)
+            ps.println(jsonString)
         }
     }
 
