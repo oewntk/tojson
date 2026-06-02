@@ -8,13 +8,9 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.BeforeClass
 import org.junit.Test
-import org.oewntk.model.CoreModel
 import org.oewntk.model.Filename
-import org.oewntk.model.LibModelSubset.lexSubset
-import org.oewntk.model.LibModelSubset.synsetSubset
 import org.oewntk.model.LibTestGen.genModelSerializables
 import org.oewntk.model.SData
-import org.oewntk.model.toSerializable
 import org.oewntk.ser.`in`.LibTestsSerCommon.checkOrig
 import org.oewntk.ser.`in`.LibTestsSerCommon.model
 import org.oewntk.ser.`in`.LibTestsSerCommon.ps
