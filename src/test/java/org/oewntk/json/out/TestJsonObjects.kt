@@ -104,7 +104,7 @@ class TestJsonObjects {
     fun testLex() {
         val lex: Lex = model.lexResolver1("jest", "n")
         val serializable: Map<String, Any> = lex.toOEWNData(model.senseResolver)
-        val jsonString = json.encodeToString(serializable)
+        val jsonString = json.encodeToString(KSData.serializer(), KSData(serializable))
         ps.println(jsonString)
     }
 
