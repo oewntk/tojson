@@ -15,7 +15,7 @@ import org.oewntk.ser.`in`.LibTestsSerCommon.ps
 import java.io.File
 import kotlin.test.assertEquals
 
-class TestJsonObjects {
+class TestJsonOEWNObjects {
 
     val json = JsonCodec(prettyPrintFlag = true)
 
