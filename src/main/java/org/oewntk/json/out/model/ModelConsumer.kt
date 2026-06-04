@@ -17,7 +17,11 @@ import java.util.function.Consumer
  * @param prettyPrint pretty print output
  * @author Bernard Bou
  */
-class ModelConsumer(private val file: File, prettyPrint: Boolean = false) : Consumer<Model> {
+class ModelConsumer(
+    private val file: File,
+    prettyPrint: Boolean = false,
+    private val verbose: Boolean = false,
+) : Consumer<Model> {
 
     @OptIn(ExperimentalSerializationApi::class)
     val json = Json {
@@ -34,7 +38,7 @@ class ModelConsumer(private val file: File, prettyPrint: Boolean = false) : Cons
 
     override fun accept(model: Model) {
         Tracing.psInfo.printf("[Model] %s%n", model.sources.contentToString())
-        val outDir =  file.parentFile
+        val outDir = file.parentFile
         if (!outDir.exists()) {
             outDir.mkdirs()
         }

@@ -17,7 +17,11 @@ import java.util.function.Consumer
  * @param prettyPrintFlag pretty print output
  * @author Bernard Bou
  */
-class CoreModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : Consumer<CoreModel> {
+class CoreModelConsumer(
+    private val file: File,
+    prettyPrintFlag: Boolean = false,
+    private val verbose: Boolean = false,
+) : Consumer<CoreModel> {
 
     @OptIn(ExperimentalSerializationApi::class)
     val json = Json {

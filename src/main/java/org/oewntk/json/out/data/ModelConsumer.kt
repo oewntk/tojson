@@ -18,7 +18,8 @@ class ModelConsumer(
     val split: Boolean = true,
     val fileext: String = "json",
     val generated: Boolean = false,
-    prettyPrint: Boolean = false
+    prettyPrint: Boolean = false,
+    private val verbose: Boolean = false,
 ) : Consumer<Model> {
 
     val json = JsonCodec(prettyPrint = prettyPrint)

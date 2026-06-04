@@ -18,7 +18,8 @@ class CoreModelConsumer(
     private val outDir: File,
     val split: Boolean = true,
     val fileext: String = "json",
-    prettyPrintFlag: Boolean = false
+    prettyPrintFlag: Boolean = false,
+    private val verbose: Boolean = false,
 ) : Consumer<CoreModel> {
 
     val json = JsonCodec(prettyPrint = prettyPrintFlag)
