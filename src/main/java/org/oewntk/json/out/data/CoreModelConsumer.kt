@@ -14,33 +14,36 @@ import java.util.function.Consumer
  * @property outDir output dir
  * @author Bernard Bou
  */
-class CoreModelDataConsumer(
+class CoreModelConsumer(
     private val outDir: File,
     val split: Boolean = true,
-    prettyPrintFlag: Boolean = true
+    val fileext: String = "json",
+    val generated: Boolean = false,
+    prettyPrintFlag: Boolean = false
 ) : Consumer<CoreModel> {
 
     val json = JsonCodec(prettyPrintFlag = prettyPrintFlag)
 
-    private fun jsonCoreModel(model: CoreModel, dir: File) {
+    private fun yamlCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.toData()
         val lexContent = json.encodeToString(dataLexes)
         val synsetContent = json.encodeToString(dataSynsets)
         val senseContent = json.encodeToString(dataSenses)
+
         if (split) {
-            var file = File(dir, "oewn-synsets.json")
+            var file = File(dir, "oewn-synsets.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent + synsetContent + senseContent)
 
-            file = File(dir, "oewn-lexes.json")
+            file = File(dir, "oewn-lexes.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent + synsetContent + senseContent)
 
-            file = File(dir, "oewn-senses.json")
+            file = File(dir, "oewn-senses.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent + synsetContent + senseContent)
         } else {
-            val file = File(dir, "oewn.json")
+            val file = File(dir, "oewn.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent + "\n\n" + synsetContent + "\n\n" + senseContent)
         }
@@ -52,7 +55,7 @@ class CoreModelDataConsumer(
             outDir.mkdirs()
         }
         try {
-            jsonCoreModel(model, outDir)
+            yamlCoreModel(model, outDir)
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }

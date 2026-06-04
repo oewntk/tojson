@@ -1,11 +1,10 @@
 package org.oewntk.json.out.oewn
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import org.oewntk.json.out.JsonCodec
 import org.oewntk.json.out.Tracing
 import org.oewntk.model.CoreModel
-import org.oewntk.model.DataCoreModel
+import org.oewntk.model.toOneOEWNData
+import org.oewntk.model.toSplitOEWNData
 import java.io.File
 import java.io.IOException
 import java.util.function.Consumer
@@ -13,34 +12,42 @@ import java.util.function.Consumer
 /**
  * Main class that serializes the core model.
  *
- * @property file output file
- * @param prettyPrintFlag pretty print output
+ * @property outDir output dir
  * @author Bernard Bou
  */
-@Suppress("unused")
-class CoreModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : Consumer<CoreModel> {
+class CoreModelConsumer(
+    private val outDir: File,
+    val split: Boolean = true,
+    val fileext: String = "json",
+    val generated: Boolean = false,
+    prettyPrintFlag: Boolean = false
+) : Consumer<CoreModel> {
 
-    @OptIn(ExperimentalSerializationApi::class)
-    val json = Json {
-        if (prettyPrintFlag) {
-            prettyPrint = true
-            prettyPrintIndent = "  " // default is 4 spaces
+    val json = JsonCodec(prettyPrintFlag = prettyPrintFlag)
+
+    private fun yamlCoreModel(model: CoreModel, dir: File) {
+        if (split) {
+            model.toSplitOEWNData(generated = generated).forEach { (serializable, file) ->
+                Tracing.psInfo.printf("[File] %s%n", file)
+                val content = json.encodeToString(serializable)
+                File(dir, "file.$fileext").writeText(content)
+            }
+        } else {
+            val file = File(dir, "oewn.$fileext")
+            val serializable = model.toOneOEWNData()
+            val content = json.encodeToString(serializable)
+            Tracing.psInfo.printf("[File] %s%n", file)
+            file.writeText(content)
         }
-    }
-
-    private fun serializeCoreModel(model: CoreModel, file: File) {
-        val jsonString = json.encodeToString(DataCoreModel(model))
-        file.writeText(jsonString)
     }
 
     override fun accept(model: CoreModel) {
         Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
-        val outDir =  file.parentFile
         if (!outDir.exists()) {
             outDir.mkdirs()
         }
         try {
-            serializeCoreModel(model, file)
+            yamlCoreModel(model, outDir)
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }
