@@ -14,15 +14,15 @@ import java.util.function.Consumer
  * Main class that serializes the model
  *
  * @property file output file
- * @param prettyPrintFlag pretty print output
+ * @param prettyPrint pretty print output
  * @author Bernard Bou
  */
-class ModelConsumer(private val file: File, prettyPrintFlag: Boolean = false) : Consumer<Model> {
+class ModelConsumer(private val file: File, prettyPrint: Boolean = false) : Consumer<Model> {
 
     @OptIn(ExperimentalSerializationApi::class)
     val json = Json {
-        if (prettyPrintFlag) {
-            prettyPrint = true
+        if (prettyPrint) {
+            this.prettyPrint = true
             prettyPrintIndent = "  " // default is 4 spaces
         }
     }

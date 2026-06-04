@@ -9,7 +9,7 @@ import org.oewntk.ser.`in`.LibTestsSerCommon
 
 class TestJsonModelOEWNSerialize {
 
-    val json = JsonCodec(prettyPrintFlag = true)
+    val json = JsonCodec(prettyPrint = true)
 
     @Test
     fun testModelSerialization() {

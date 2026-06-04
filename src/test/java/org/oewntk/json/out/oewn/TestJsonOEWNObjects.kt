@@ -21,7 +21,7 @@ import kotlin.test.assertEquals
 
 class TestJsonOEWNObjects {
 
-    val json = JsonCodec(prettyPrintFlag = true)
+    val json = JsonCodec(prettyPrint = true)
 
     @Test
     fun testDummyEmptyLex() {

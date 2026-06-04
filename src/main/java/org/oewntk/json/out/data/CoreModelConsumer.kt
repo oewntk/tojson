@@ -18,11 +18,10 @@ class CoreModelConsumer(
     private val outDir: File,
     val split: Boolean = true,
     val fileext: String = "json",
-    val generated: Boolean = false,
     prettyPrintFlag: Boolean = false
 ) : Consumer<CoreModel> {
 
-    val json = JsonCodec(prettyPrintFlag = prettyPrintFlag)
+    val json = JsonCodec(prettyPrint = prettyPrintFlag)
 
     private fun yamlCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.toData()

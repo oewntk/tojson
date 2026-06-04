@@ -23,7 +23,7 @@ class CoreModelConsumer(
     prettyPrintFlag: Boolean = false
 ) : Consumer<CoreModel> {
 
-    val json = JsonCodec(prettyPrintFlag = prettyPrintFlag)
+    val json = JsonCodec(prettyPrint = prettyPrintFlag)
 
     private fun yamlCoreModel(model: CoreModel, dir: File) {
         if (split) {

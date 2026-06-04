@@ -18,10 +18,10 @@ class ModelConsumer(
     val split: Boolean = true,
     val fileext: String = "json",
     val generated: Boolean = false,
-    prettyPrintFlag: Boolean = false
+    prettyPrint: Boolean = false
 ) : Consumer<Model> {
 
-    val json = JsonCodec(prettyPrintFlag = prettyPrintFlag)
+    val json = JsonCodec(prettyPrint = prettyPrint)
 
     private fun yamlModel(model: Model, dir: File) {
         val frameMap = model.verbFrames.associate { it.id to it.frame }
