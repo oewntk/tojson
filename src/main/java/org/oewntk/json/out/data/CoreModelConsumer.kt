@@ -18,11 +18,12 @@ class CoreModelConsumer(
     private val outDir: File,
     val split: Boolean = true,
     val fileext: String = "json",
-    prettyPrintFlag: Boolean = false,
+    jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
+    prettyPrint: Boolean = true,
     private val verbose: Boolean = false,
 ) : Consumer<CoreModel> {
 
-    val json = JsonCodec(prettyPrint = prettyPrintFlag)
+    val json = JsonCodec(jsonMethod = jsonMethod, prettyPrint = prettyPrint)
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.toData()
