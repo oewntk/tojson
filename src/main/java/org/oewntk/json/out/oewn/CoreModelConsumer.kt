@@ -26,7 +26,7 @@ class CoreModelConsumer(
 
     val json = JsonCodec(prettyPrint = prettyPrintFlag)
 
-    private fun yamlCoreModel(model: CoreModel, dir: File) {
+    private fun jsonCoreModel(model: CoreModel, dir: File) {
         if (split) {
             model.toSplitOEWNData(generated = generated).forEach { (serializable, file) ->
                 Tracing.psInfo.printf("[File] %s%n", file)
