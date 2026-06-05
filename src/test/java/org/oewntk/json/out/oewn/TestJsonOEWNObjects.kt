@@ -3,7 +3,7 @@ package org.oewntk.json.out.oewn
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.json.out.JsonCodec
-import org.oewntk.json.out.Method
+import org.oewntk.json.out.JsonMethod
 import org.oewntk.model.*
 import org.oewntk.model.Lex.Groups.lexByLemmaThenByKey2
 import org.oewntk.model.LibModelSubset.lexSubset
@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
 
 class TestJsonOEWNObjects {
 
-    val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
+    val json = JsonCodec(jsonMethod = JsonMethod.ANY_SERIALIZER, prettyPrint = true)
 
     @Test
     fun testDummyEmptyLex() {

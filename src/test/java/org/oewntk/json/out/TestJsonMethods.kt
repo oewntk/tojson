@@ -10,7 +10,7 @@ class TestJsonMethods {
 
     val lex = Lex(
         lemma = "jest",
-        code = "v",
+        key2 = "v",
         senseKeys = listOf("jest%2:32:00::", "jest%2:29:00::")
     )
         .apply {
@@ -31,7 +31,7 @@ class TestJsonMethods {
 
     @Test
     fun testDummyLex() {
-        val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.ANY_SERIALIZER, prettyPrint = true)
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -39,7 +39,7 @@ class TestJsonMethods {
 
     @Test
     fun testDummySynset() {
-        val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.ANY_SERIALIZER, prettyPrint = true)
         val serializable: Map<String, Any> = synset.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -47,7 +47,7 @@ class TestJsonMethods {
 
     @Test
     fun testDummySense() {
-        val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.ANY_SERIALIZER, prettyPrint = true)
         val serializable: Map<String, Any> = sense.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -55,7 +55,7 @@ class TestJsonMethods {
 
     @Test
     fun testJsonElementDummyLex() {
-        val json = JsonCodec(method = Method.THROUGH_JSON_ELEMENT, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.JSON_ELEMENT, prettyPrint = true)
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -63,7 +63,7 @@ class TestJsonMethods {
 
     @Test
     fun testJsonElementDummySynset() {
-        val json = JsonCodec(method = Method.THROUGH_JSON_ELEMENT, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.JSON_ELEMENT, prettyPrint = true)
         val serializable: Map<String, Any> = synset.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -71,7 +71,7 @@ class TestJsonMethods {
 
     @Test
     fun testJsonElementDummySense() {
-        val json = JsonCodec(method = Method.THROUGH_JSON_ELEMENT, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.JSON_ELEMENT, prettyPrint = true)
         val serializable: Map<String, Any> = sense.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -79,7 +79,7 @@ class TestJsonMethods {
 
     @Test
     fun testValueWrapperDummyLex() {
-        val json = JsonCodec(method = Method.VALUE_WRAPPER, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.VALUE_WRAPPER, prettyPrint = true)
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -87,7 +87,7 @@ class TestJsonMethods {
 
     @Test
     fun testValueWrapperDummySynset() {
-        val json = JsonCodec(method = Method.VALUE_WRAPPER, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.VALUE_WRAPPER, prettyPrint = true)
         val serializable: Map<String, Any> = synset.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
@@ -95,7 +95,7 @@ class TestJsonMethods {
 
     @Test
     fun testValueWrapperDummySense() {
-        val json = JsonCodec(method = Method.VALUE_WRAPPER, prettyPrint = true)
+        val json = JsonCodec(jsonMethod = JsonMethod.VALUE_WRAPPER, prettyPrint = true)
         val serializable: Map<String, Any> = sense.toData()
         val jsonString = json.encodeToString(serializable)
         ps.println(jsonString)
