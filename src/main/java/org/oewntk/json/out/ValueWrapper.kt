@@ -40,6 +40,7 @@ fun Any?.toValue(): Value = when (this) {
     is Long -> Value.LongValue(this)
     is Float -> Value.FloatValue(this)
     is Double -> Value.DoubleValue(this)
+    is Char -> Value.CharValue(this)
     is String -> Value.StringValue(this)
     is Array<*> -> Value.ListValue(this.map { it.toValue() })
     is List<*> -> Value.ListValue(this.map { it.toValue() })
@@ -55,6 +56,7 @@ fun Value?.fromValue(): Any = when (this) {
     is Value.LongValue -> v
     is Value.FloatValue -> v
     is Value.DoubleValue -> v
+    is Value.CharValue -> v
     is Value.StringValue -> v
     is Value.ListValue -> v.map { it.fromValue() }
     is Value.SetValue -> v.map { it.fromValue() }.toSet()
