@@ -24,7 +24,7 @@ class ModelConsumer(
 
     val json = JsonCodec(prettyPrint = prettyPrint)
 
-    private fun yamlModel(model: Model, dir: File) {
+    private fun jsonModel(model: Model, dir: File) {
         val frameMap = model.verbFrames.associate { it.id to it.frame }
         val frameContent = json.encodeToString(frameMap)
         val frameFile = File(dir, "frames.$fileext")
@@ -45,7 +45,7 @@ class ModelConsumer(
         }
         CoreModelConsumer(outDir, split = split, fileext = fileext, generated = generated).accept(model)
         try {
-            yamlModel(model, outDir)
+            jsonModel(model, outDir)
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }
