@@ -31,17 +31,17 @@ class CoreModelConsumer(
         val senseContent = json.encodeToString(dataSenses)
 
         if (split) {
-            var file = File(dir, "oewn-synsets.$fileext")
+            var file = File(dir, "oewn-lexes.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
-            file.writeText(lexContent + synsetContent + senseContent)
+            file.writeText(lexContent)
 
-            file = File(dir, "oewn-lexes.$fileext")
+            file = File(dir, "oewn-synsets.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
-            file.writeText(lexContent + synsetContent + senseContent)
+            file.writeText(synsetContent)
 
             file = File(dir, "oewn-senses.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
-            file.writeText(lexContent + synsetContent + senseContent)
+            file.writeText(senseContent)
         } else {
             val file = File(dir, "oewn.$fileext")
             Tracing.psInfo.printf("[File] %s%n", file)
