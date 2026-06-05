@@ -3,33 +3,47 @@ package org.oewntk.json.out
 @kotlinx.serialization.Serializable
 sealed class Value {
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("null")
     object NullValue : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("bool")
     data class BoolValue(val v: Boolean) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("int")
     data class IntValue(val v: Int) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("long")
     data class LongValue(val v: Long) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("float")
     data class FloatValue(val v: Float) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("double")
     data class DoubleValue(val v: Double) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("char")
+    data class CharValue(val v: Char) : Value()
+
+    @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("string")
     data class StringValue(val v: String) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("list")
     data class ListValue(val v: List<Value>) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("set")
     data class SetValue(val v: Set<Value>) : Value()
 
     @kotlinx.serialization.Serializable
+    @kotlinx.serialization.SerialName("map")
     data class MapValue(val v: Map<String, Value>) : Value()
 }
 
