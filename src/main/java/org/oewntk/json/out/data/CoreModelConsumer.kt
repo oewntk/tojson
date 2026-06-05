@@ -24,7 +24,7 @@ class CoreModelConsumer(
 
     val json = JsonCodec(prettyPrint = prettyPrintFlag)
 
-    private fun yamlCoreModel(model: CoreModel, dir: File) {
+    private fun jsonCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.toData()
         val lexContent = json.encodeToString(dataLexes)
         val synsetContent = json.encodeToString(dataSynsets)
@@ -55,7 +55,7 @@ class CoreModelConsumer(
             outDir.mkdirs()
         }
         try {
-            yamlCoreModel(model, outDir)
+            jsonCoreModel(model, outDir)
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }
