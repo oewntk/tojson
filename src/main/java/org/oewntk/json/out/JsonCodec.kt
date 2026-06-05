@@ -4,13 +4,13 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-enum class Method {
+enum class JsonMethod {
     ANY_SERIALIZER,
-    THROUGH_JSON_ELEMENT,
+    JSON_ELEMENT,
     VALUE_WRAPPER,
 }
 
-class JsonCodec(prettyPrint: Boolean = true, val method: Method = Method.ANY_SERIALIZER) {
+class JsonCodec(prettyPrint: Boolean = true, val jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER) {
 
     @OptIn(ExperimentalSerializationApi::class)
     val delegate = Json {
@@ -21,18 +21,18 @@ class JsonCodec(prettyPrint: Boolean = true, val method: Method = Method.ANY_SER
     }
 
     fun encodeToString(value: Any): String {
-        return when (method) {
-            Method.ANY_SERIALIZER -> delegate.encodeToString(SerializableWrapper.serializer(), SerializableWrapper(value))
-            Method.THROUGH_JSON_ELEMENT -> delegate.encodeToString(AnySerializerThroughJsonElement, value)
-            Method.VALUE_WRAPPER -> delegate.encodeToString(value.toValue())
+        return when (jsonMethod) {
+            JsonMethod.ANY_SERIALIZER -> delegate.encodeToString(SerializableWrapper.serializer(), SerializableWrapper(value))
+            JsonMethod.JSON_ELEMENT -> delegate.encodeToString(AnySerializerThroughJsonElement, value)
+            JsonMethod.VALUE_WRAPPER -> delegate.encodeToString(value.toValue())
         }
     }
 
     fun decodeString(str: String): Any {
-        return when (method) {
-            Method.ANY_SERIALIZER -> delegate.decodeFromString(SerializableWrapper.serializer(), str).data
-            Method.THROUGH_JSON_ELEMENT -> delegate.decodeFromString(AnySerializerThroughJsonElement, str)
-            Method.VALUE_WRAPPER -> delegate.decodeFromString<Value>(str).fromValue()
+        return when (jsonMethod) {
+            JsonMethod.ANY_SERIALIZER -> delegate.decodeFromString(SerializableWrapper.serializer(), str).data
+            JsonMethod.JSON_ELEMENT -> delegate.decodeFromString(AnySerializerThroughJsonElement, str)
+            JsonMethod.VALUE_WRAPPER -> delegate.decodeFromString<Value>(str).fromValue()
         }
     }
 }
