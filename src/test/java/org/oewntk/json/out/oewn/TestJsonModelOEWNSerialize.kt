@@ -3,13 +3,14 @@ package org.oewntk.json.out.oewn
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.json.out.JsonCodec
+import org.oewntk.json.out.Method
 import org.oewntk.model.Filename
 import org.oewntk.model.LibTestGen
 import org.oewntk.ser.`in`.LibTestsSerCommon
 
 class TestJsonModelOEWNSerialize {
 
-    val json = JsonCodec(prettyPrint = true)
+    val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
 
     @Test
     fun testModelSerialization() {

@@ -3,6 +3,7 @@ package org.oewntk.json.out.data
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.json.out.JsonCodec
+import org.oewntk.json.out.Method
 import org.oewntk.model.LibModelSubset.subset
 import org.oewntk.model.toLexesData
 import org.oewntk.model.toSensesData
@@ -11,7 +12,7 @@ import org.oewntk.ser.`in`.LibTestsSerCommon
 
 class TestJsonModelDataSerialize {
 
-    val json = JsonCodec(prettyPrint = true)
+    val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
 
     @Test
     fun testModelSerialization() {

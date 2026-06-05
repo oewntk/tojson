@@ -3,25 +3,19 @@ package org.oewntk.json.out.oewn
 import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.json.out.JsonCodec
-import org.oewntk.model.HyperMap1
-import org.oewntk.model.Lemma
-import org.oewntk.model.Lex
+import org.oewntk.json.out.Method
+import org.oewntk.model.*
 import org.oewntk.model.Lex.Groups.lexByLemmaThenByKey2
 import org.oewntk.model.LibModelSubset.lexSubset
 import org.oewntk.model.LibModelSubset.synsetSubset
 import org.oewntk.model.MapFactory.synsetsById
-import org.oewntk.model.ModelInfo
-import org.oewntk.model.Synset
-import org.oewntk.model.SynsetId
-import org.oewntk.model.SynsetType
-import org.oewntk.model.toOEWNData
 import org.oewntk.ser.`in`.LibTestsSerCommon
 import java.io.File
 import kotlin.test.assertEquals
 
 class TestJsonOEWNObjects {
 
-    val json = JsonCodec(prettyPrint = true)
+    val json = JsonCodec(method = Method.ANY_SERIALIZER, prettyPrint = true)
 
     @Test
     fun testDummyEmptyLex() {
