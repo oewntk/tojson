@@ -24,19 +24,17 @@ object AnySerializer : KSerializer<Any> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Any")
 
     override fun serialize(encoder: Encoder, value: Any) {
-        val jsonEncoder = encoder as? JsonEncoder
-            ?: throw IllegalStateException("This serializer only works with JSON")
+        val jsonEncoder = encoder as? JsonEncoder ?: throw IllegalStateException("This serializer only works with JSON")
 
         // Convert the arbitrary runtime object into a proper JsonElement recursively
         jsonEncoder.encodeJsonElement(value.toJsonElement())
     }
 
     override fun deserialize(decoder: Decoder): Any {
-        val jsonDecoder = decoder as? JsonDecoder
-            ?: throw IllegalStateException("This serializer only works with JSON")
+        val jsonDecoder = decoder as? JsonDecoder ?: throw IllegalStateException("This serializer only works with JSON")
 
         // Convert JsonElement back to native Kotlin types (Maps, Lists, Primitives)
-        return jsonDecoder.decodeJsonElement().toNativeValue() ?: "Null"
+        return jsonDecoder.decodeJsonElement().toNativeValue() ?: "null"
     }
 
     // Helper to recursively transform Any into JsonElement
