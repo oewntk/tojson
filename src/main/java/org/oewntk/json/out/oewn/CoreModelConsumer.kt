@@ -48,7 +48,7 @@ class CoreModelConsumer(
             outDir.mkdirs()
         }
         try {
-            yamlCoreModel(model, outDir)
+            jsonCoreModel(model, outDir)
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }
