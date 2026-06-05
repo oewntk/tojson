@@ -36,7 +36,7 @@ class CoreModelConsumer(
             }
         } else {
             val file = File(dir, "oewn.$fileext")
-            val serializable = model.toOneOEWNData()
+            val serializable = model.toOneOEWNData().toList()
             val content = json.encodeToString(serializable)
             Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(content)
