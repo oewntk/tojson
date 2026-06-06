@@ -27,7 +27,7 @@ class TestJsonMethods {
     ).apply {
     }
 
-    val sense = Sense("jest%2:32:00::", lex.key, "00855315-v", SynsetType.V, 0)
+    val sense = Sense("jest%2:32:00::", lex.key, "00855315-v", SynsetType.V)
 
     @Test
     fun testDummyLex() {
