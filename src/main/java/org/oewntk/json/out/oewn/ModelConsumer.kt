@@ -26,7 +26,7 @@ class ModelConsumer(
 
     val json = JsonCodec(jsonMethod = jsonMethod, prettyPrint = prettyPrint)
 
-    private fun jsonModel(model: Model, dir: File) {
+    private fun jsonExtra(model: Model, dir: File) {
         val frameMap = model.verbFrames.associate { it.id to it.frame }
         val frameContent = json.encodeToString(frameMap)
         val frameFile = File(dir, "frames.$fileext")
@@ -47,7 +47,7 @@ class ModelConsumer(
         }
         CoreModelConsumer(outDir, split = split, fileext = fileext, generated = generated, jsonMethod = jsonMethod, prettyPrint = prettyPrint).accept(model)
         try {
-            jsonModel(model, outDir)
+            jsonExtra(model, outDir)
         } catch (e: IOException) {
             e.printStackTrace(Tracing.psErr)
         }
