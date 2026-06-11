@@ -29,15 +29,21 @@ class ModelConsumer(
     private fun jsonExtra(model: Model, dir: File) {
         val frameMap = model.verbFrames.associate { it.id to it.frame }
         val frameContent = json.encodeToString(frameMap)
-        val frameFile = File(dir, "frames.$fileext")
-        if (verbose) Tracing.psInfo.printf("[File] %s%n", frameFile)
-        frameFile.writeText(frameContent)
-
         val templateMap = model.verbTemplates.associate { it.id to it.template }
         val templateContent = json.encodeToString(templateMap)
-        val templateFile = File(dir, "templates.$fileext")
-        if (verbose) Tracing.psInfo.printf("[File] %s%n", templateFile)
-        templateFile.writeText(templateContent)
+        if (split) {
+            val frameFile = File(dir, "frames.$fileext")
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", frameFile)
+            frameFile.writeText(frameContent)
+
+            val templateFile = File(dir, "templates.$fileext")
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", templateFile)
+            templateFile.writeText(templateContent)
+        } else {
+            val frameTemplateFile = File(dir, "frames_templates.$fileext")
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", frameTemplateFile)
+            frameTemplateFile.writeText(frameContent + "\n\n" + templateContent)
+        }
     }
 
     override fun accept(model: Model) {
