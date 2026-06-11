@@ -4,6 +4,7 @@ import org.oewntk.json.out.JsonCodec
 import org.oewntk.json.out.JsonMethod
 import org.oewntk.json.out.Tracing
 import org.oewntk.model.CoreModel
+import org.oewntk.model.toOEWNData
 import org.oewntk.model.toOneOEWNData
 import org.oewntk.model.toSplitOEWNData
 import java.io.File
@@ -31,21 +32,24 @@ class CoreModelConsumer(
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         if (split) {
             model.toSplitOEWNData(generated = generated).forEach { (serializable, file) ->
-                Tracing.psInfo.printf("[File] %s%n", file)
+                if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
                 val content = json.encodeToString(serializable)
                 File(dir, "$file.$fileext").writeText(content)
             }
         } else {
             val file = File(dir, "oewn.$fileext")
-            val serializable = model.toOneOEWNData().toList()
-            val content = json.encodeToString(serializable)
-            Tracing.psInfo.printf("[File] %s%n", file)
-            file.writeText(content)
+            val serializables = model.toOneOEWNData().iterator()
+            val (serializable1, _) = serializables.next()
+            val (serializable2, _) = serializables.next()
+            val content1 = json.encodeToString(serializable1)
+            val content2 = json.encodeToString(serializable2)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
+            file.writeText(content1 + "\n\n" + content2)
         }
     }
 
     override fun accept(model: CoreModel) {
-        Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
+        if (verbose) Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
         if (!outDir.exists()) {
             outDir.mkdirs()
         }
