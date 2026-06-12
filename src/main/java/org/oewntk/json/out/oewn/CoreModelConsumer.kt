@@ -4,7 +4,6 @@ import org.oewntk.json.out.JsonCodec
 import org.oewntk.json.out.JsonMethod
 import org.oewntk.json.out.Tracing
 import org.oewntk.model.CoreModel
-import org.oewntk.model.toOEWNData
 import org.oewntk.model.toOneOEWNData
 import org.oewntk.model.toSplitOEWNData
 import java.io.File
