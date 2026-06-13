@@ -21,9 +21,9 @@ class TestJsonMethods {
         synsetId = "00855315-v",
         type = SynsetType.V,
         domain = "communication",
-        members = arrayOf("joke", "jest"),
-        definitions = arrayOf("tell a joke", "speak humorously"),
-        examples = arrayOf("He often jokes" to null),
+        members = setOf("joke", "jest"),
+        definitions = listOf("tell a joke", "speak humorously"),
+        examples = listOf("He often jokes" to null),
     ).apply {
     }
 
