@@ -87,7 +87,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testRandomSynsets() {
-        val someSynsets: Sequence<Synset> = LibTestsSerCommon.model.synsetSubset()
+        val someSynsets: Sequence<Synset> = LibTestsSerCommon.model.synsetSubset().asSequence()
         val serializables: Sequence<Map<String, Any>> = someSynsets.map { it.toData() }
         val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         LibTestsSerCommon.ps.println(jsonStrings.joinToString("\n\n"))
@@ -113,7 +113,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testRandomLexes() {
-        val someLexes: Sequence<Lex> = LibTestsSerCommon.model.lexSubset()
+        val someLexes: Sequence<Lex> = LibTestsSerCommon.model.lexSubset().asSequence()
         val serializables: Sequence<Map<String, Any>> = someLexes.map { it.toData() }
         val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         LibTestsSerCommon.ps.println(jsonStrings.joinToString("\n\n"))

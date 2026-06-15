@@ -11,6 +11,7 @@ import org.oewntk.model.LibModelSubset.synsetSubset
 import org.oewntk.model.MapFactory.synsetsById
 import org.oewntk.ser.`in`.LibTestsSerCommon
 import java.io.File
+import kotlin.sequences.asSequence
 import kotlin.test.assertEquals
 
 class TestJsonOEWNObjects {
@@ -85,7 +86,7 @@ class TestJsonOEWNObjects {
 
     @Test
     fun testRandomSynsets() {
-        val someSynsets: Sequence<Synset> = LibTestsSerCommon.model.synsetSubset()
+        val someSynsets: Sequence<Synset> = LibTestsSerCommon.model.synsetSubset().asSequence()
         val serializables: Sequence<Map<String, Any>> = someSynsets.map { it.toOEWNData() }
         val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         LibTestsSerCommon.ps.println(jsonStrings.joinToString("\n\n"))
@@ -111,7 +112,7 @@ class TestJsonOEWNObjects {
 
     @Test
     fun testRandomLexes() {
-        val someLexes: Sequence<Lex> = LibTestsSerCommon.model.lexSubset()
+        val someLexes: Sequence<Lex> = LibTestsSerCommon.model.lexSubset().asSequence()
         val serializables: Sequence<Map<String, Any>> = someLexes.map { it.toOEWNData(LibTestsSerCommon.model.senseResolver) }
         val jsonStrings: Sequence<String> = serializables.map { json.encodeToString(it) }
         LibTestsSerCommon.ps.println(jsonStrings.joinToString("\n\n"))
@@ -119,7 +120,7 @@ class TestJsonOEWNObjects {
 
     @Test
     fun testSomeLexesByLemmaThenByKey2() {
-        val someLexes: Sequence<Lex> = LibTestsSerCommon.model.lexSubset(howMany = 5)
+        val someLexes: Sequence<Lex> = LibTestsSerCommon.model.lexSubset(howMany = 5).asSequence()
         val map: HyperMap1 = someLexes.lexByLemmaThenByKey2()
         val serializedMap: Map<Lemma, Any> = map.toOEWNData(LibTestsSerCommon.model.senseResolver)
         val jsonString = json.encodeToString(serializedMap)
@@ -128,7 +129,7 @@ class TestJsonOEWNObjects {
 
     @Test
     fun testSomeSynsetsBySynsetId() {
-        val someSynsets: Sequence<Synset> = LibTestsSerCommon.model.synsetSubset(howMany = 5)
+        val someSynsets: Sequence<Synset> = LibTestsSerCommon.model.synsetSubset(howMany = 5).asSequence()
         val map: Map<SynsetId, Synset> = someSynsets.synsetsById()
         val serializedMap: Map<SynsetId, Any> = map.toOEWNData()
         val jsonString = json.encodeToString(serializedMap)
