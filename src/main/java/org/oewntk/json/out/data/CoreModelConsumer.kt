@@ -34,25 +34,25 @@ class CoreModelConsumer(
 
         if (split) {
             var file = File(dir, "oewn-lexes.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", file)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent)
 
             file = File(dir, "oewn-synsets.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", file)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(synsetContent)
 
             file = File(dir, "oewn-senses.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", file)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(senseContent)
         } else {
             val file = File(dir, "oewn.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", file)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent + "\n\n" + synsetContent + "\n\n" + senseContent)
         }
     }
 
     override fun accept(model: CoreModel) {
-        Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
+        if (verbose) Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
         if (!outDir.exists()) {
             outDir.mkdirs()
         }

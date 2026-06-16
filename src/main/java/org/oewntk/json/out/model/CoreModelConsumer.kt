@@ -37,7 +37,7 @@ class CoreModelConsumer(
     }
 
     override fun accept(model: CoreModel) {
-        Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
+        if (verbose) Tracing.psInfo.printf("[CoreModel] %s%n", model.source)
         val outDir =  file.parentFile
         if (!outDir.exists()) {
             outDir.mkdirs()
