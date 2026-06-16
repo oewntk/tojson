@@ -11,7 +11,6 @@ import org.oewntk.model.LibModelSubset.synsetSubset
 import org.oewntk.model.MapFactory.synsetsById
 import org.oewntk.ser.`in`.LibTestsSerCommon
 import java.io.File
-import kotlin.sequences.asSequence
 import kotlin.test.assertEquals
 
 class TestJsonOEWNObjects {
