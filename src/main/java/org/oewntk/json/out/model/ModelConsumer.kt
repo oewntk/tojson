@@ -37,7 +37,7 @@ class ModelConsumer(
     }
 
     override fun accept(model: Model) {
-        Tracing.psInfo.println("[Model] $model")
+        if (verbose) Tracing.psInfo.println("[Model] $model")
         val outDir = file.parentFile
         if (!outDir.exists()) {
             outDir.mkdirs()

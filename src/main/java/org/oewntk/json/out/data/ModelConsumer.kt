@@ -33,14 +33,14 @@ class ModelConsumer(
         val templateContent = json.encodeToString(templateMap)
         if (split) {
             val frameFile = File(dir, "oewn-frames.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", frameFile)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", frameFile)
             frameFile.writeText(frameContent)
             val templateFile = File(dir, "oewn-templates.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", templateFile)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", templateFile)
             templateFile.writeText(templateContent)
         } else {
             val frameAndTemplateFile = File(dir, "oewn-frames_templates.$fileext")
-            Tracing.psInfo.printf("[File] %s%n", frameAndTemplateFile)
+            if (verbose) Tracing.psInfo.printf("[File] %s%n", frameAndTemplateFile)
             frameAndTemplateFile.writeText(frameContent + "\n\n" + templateContent)
         }
     }
