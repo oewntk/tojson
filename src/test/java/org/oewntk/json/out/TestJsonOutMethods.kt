@@ -5,7 +5,7 @@ import org.oewntk.model.*
 import org.oewntk.ser.`in`.Tracing
 import java.io.PrintStream
 
-class TestJsonMethods {
+class TestJsonOutMethods {
 
     val lex = Lex(
         lemma = "jest",
