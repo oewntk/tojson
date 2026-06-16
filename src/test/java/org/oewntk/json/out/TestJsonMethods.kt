@@ -1,6 +1,5 @@
 package org.oewntk.json.out
 
-import org.junit.BeforeClass
 import org.junit.Test
 import org.oewntk.model.*
 import org.oewntk.ser.`in`.Tracing
