@@ -29,7 +29,7 @@ class ModelConsumer(
     private fun jsonExtra(model: Model, dir: File) {
         val frameMap = model.verbFrames.associate { it.id to it.frame }
         val frameContent = json.encodeToString(frameMap)
-        val templateMap = model.verbTemplates.associate { it.id to it.template }
+        val templateMap = model.verbTemplates.associate { it.id.toString() to it.template }
         val templateContent = json.encodeToString(templateMap)
         if (split) {
             val frameFile = File(dir, "oewn-frames.$fileext")
