@@ -21,6 +21,7 @@ class ModelConsumer(
     val generated: Boolean = false,
     val jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
     val prettyPrint: Boolean = true,
+    val leaveRedundantRelation: Boolean = false,
     private val verbose: Boolean = false,
 ) : Consumer<Model> {
 
@@ -51,7 +52,7 @@ class ModelConsumer(
         if (!outDir.exists()) {
             outDir.mkdirs()
         }
-        CoreModelConsumer(outDir, split = split, fileext = fileext, generated = generated, jsonMethod = jsonMethod, prettyPrint = prettyPrint).accept(model)
+        CoreModelConsumer(outDir, split = split, fileext = fileext, generated = generated, jsonMethod = jsonMethod, prettyPrint = prettyPrint, leaveRedundantRelation = leaveRedundantRelation).accept(model)
         try {
             jsonExtra(model, outDir)
         } catch (e: IOException) {

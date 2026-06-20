@@ -14,13 +14,15 @@ open class ObjectTransformer(
     val mode: SerializationMode = SerializationMode.DATA,
     jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
     prettyPrint: Boolean = true,
-) : (Any, CoreModel) -> String {
+    val leaveRedundantRelation: Boolean = false,
+
+    ) : (Any, CoreModel) -> String {
 
     val json = JsonCodec(jsonMethod = jsonMethod, prettyPrint = prettyPrint)
 
     override fun invoke(obj: Any, model: CoreModel): String {
 
-        val serializable = mode.serialize(obj, model.senseResolver)
+        val serializable = mode.serialize(obj, model.senseResolver, leaveRedundantRelation = leaveRedundantRelation)
         return json.encodeToString(serializable)
     }
 }
@@ -30,7 +32,8 @@ open class ObjectConsumer(
     mode: SerializationMode = SerializationMode.DATA,
     jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
     prettyPrint: Boolean = true,
-) : ObjectTransformer(mode = mode, jsonMethod = jsonMethod, prettyPrint = prettyPrint), BiConsumer<Any, CoreModel> {
+    leaveRedundantRelation: Boolean = false,
+) : ObjectTransformer(mode = mode, jsonMethod = jsonMethod, prettyPrint = prettyPrint, leaveRedundantRelation = leaveRedundantRelation), BiConsumer<Any, CoreModel> {
 
     override fun accept(obj: Any, model: CoreModel) {
         val str = super.invoke(obj, model)

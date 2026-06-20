@@ -23,6 +23,7 @@ class CoreModelConsumer(
     val generated: Boolean = false,
     jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
     prettyPrint: Boolean = true,
+    val leaveRedundantRelation: Boolean = false,
     private val verbose: Boolean = false,
 ) : Consumer<CoreModel> {
 
@@ -30,14 +31,14 @@ class CoreModelConsumer(
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         if (split) {
-            model.toSplitOEWNData(generated = generated).forEach { (serializable, file) ->
+            model.toSplitOEWNData(generated = generated, leaveRedundantRelation = leaveRedundantRelation).forEach { (serializable, file) ->
                 if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
                 val content = json.encodeToString(serializable)
                 File(dir, "$file.$fileext").writeText(content)
             }
         } else {
             val file = File(dir, "oewn.$fileext")
-            val serializables = model.toOneOEWNData().iterator()
+            val serializables = model.toOneOEWNData(leaveRedundantRelation = leaveRedundantRelation).iterator()
             val (serializable1, _) = serializables.next()
             val (serializable2, _) = serializables.next()
             val content1 = json.encodeToString(serializable1)
