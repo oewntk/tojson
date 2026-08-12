@@ -21,7 +21,7 @@ class CoreModelConsumer(
     val split: Boolean = true,
     val fileext: String = "json",
     val generated: Boolean = false,
-    jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
+    jsonMethod: JsonMethod = JsonMethod.JSON_ELEMENT,
     prettyPrint: Boolean = true,
     val leaveRedundantRelation: Boolean = false,
     private val verbose: Boolean = false,
