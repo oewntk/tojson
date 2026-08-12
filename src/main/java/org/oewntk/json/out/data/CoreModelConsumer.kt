@@ -18,6 +18,7 @@ import java.util.function.Consumer
 class CoreModelConsumer(
     private val outDir: File,
     val split: Boolean = true,
+    val bag: Boolean = false,
     val fileext: String = "json",
     jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
     prettyPrint: Boolean = true,
@@ -28,11 +29,11 @@ class CoreModelConsumer(
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         val (dataLexes, dataSynsets, dataSenses) = model.toData()
-        val lexContent = json.encodeToString(dataLexes)
-        val synsetContent = json.encodeToString(dataSynsets)
-        val senseContent = json.encodeToString(dataSenses)
 
         if (split) {
+            val lexContent = json.encodeToString(dataLexes)
+            val synsetContent = json.encodeToString(dataSynsets)
+            val senseContent = json.encodeToString(dataSenses)
             var file = File(dir, "oewn-lexes.$fileext")
             if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(lexContent)
@@ -45,9 +46,16 @@ class CoreModelConsumer(
             if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
             file.writeText(senseContent)
         } else {
+            val data = if (bag) dataLexes + dataSynsets + dataSenses else
+                mapOf(
+                    "lexes" to dataLexes,
+                    "synsets" to dataSynsets,
+                    "senses" to dataSenses
+                )
+            val content = json.encodeToString(data)
             val file = File(dir, "oewn.$fileext")
             if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
-            file.writeText(lexContent + "\n\n" + synsetContent + "\n\n" + senseContent)
+            file.writeText(content)
         }
     }
 

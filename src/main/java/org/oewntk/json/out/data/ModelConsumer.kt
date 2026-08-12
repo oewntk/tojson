@@ -31,18 +31,18 @@ class ModelConsumer(
         val frameContent = json.encodeToString(frameMap)
         val templateMap = model.verbTemplates.associate { it.id.toString() to it.template }
         val templateContent = json.encodeToString(templateMap)
-        if (split) {
+        //if (split) {
             val frameFile = File(dir, "oewn-frames.$fileext")
             if (verbose) Tracing.psInfo.printf("[File] %s%n", frameFile)
             frameFile.writeText(frameContent)
             val templateFile = File(dir, "oewn-templates.$fileext")
             if (verbose) Tracing.psInfo.printf("[File] %s%n", templateFile)
             templateFile.writeText(templateContent)
-        } else {
-            val frameAndTemplateFile = File(dir, "oewn-frames_templates.$fileext")
-            if (verbose) Tracing.psInfo.printf("[File] %s%n", frameAndTemplateFile)
-            frameAndTemplateFile.writeText(frameContent + "\n\n" + templateContent)
-        }
+        //} else {
+        //    val frameAndTemplateFile = File(dir, "oewn-frames_templates.$fileext")
+        //    if (verbose) Tracing.psInfo.printf("[File] %s%n", frameAndTemplateFile)
+        //    frameAndTemplateFile.writeText(frameContent + "\n\n" + templateContent)
+        //}
     }
 
     override fun accept(model: Model) {

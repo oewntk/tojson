@@ -19,6 +19,7 @@ import java.util.function.Consumer
 class CoreModelConsumer(
     private val outDir: File,
     val split: Boolean = true,
+    val bag: Boolean = false,
     val fileext: String = "json",
     val generated: Boolean = false,
     jsonMethod: JsonMethod = JsonMethod.JSON_ELEMENT,
@@ -31,20 +32,26 @@ class CoreModelConsumer(
 
     private fun jsonCoreModel(model: CoreModel, dir: File) {
         if (split) {
-            model.toSplitOEWNData(generated = generated, leaveRedundantRelation = leaveRedundantRelation).forEach { (serializable, file) ->
-                if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
-                val content = json.encodeToString(serializable)
-                File(dir, "$file.$fileext").writeText(content)
-            }
+            model.toSplitOEWNData(generated = generated, leaveRedundantRelation = leaveRedundantRelation)
+                .forEach { (serializable, file) ->
+                    if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
+                    val content = json.encodeToString(serializable)
+                    File(dir, "$file.$fileext").writeText(content)
+                }
         } else {
+            val (lexSerializable, synsetSerializable) = model.toOneOEWNData(leaveRedundantRelation = leaveRedundantRelation)
+            val data = if (bag) {
+                lexSerializable + synsetSerializable
+            } else {
+                mapOf(
+                    "lexes" to lexSerializable,
+                    "synsets" to synsetSerializable,
+                )
+            }
             val file = File(dir, "oewn.$fileext")
-            val serializables = model.toOneOEWNData(leaveRedundantRelation = leaveRedundantRelation).iterator()
-            val (serializable1, _) = serializables.next()
-            val (serializable2, _) = serializables.next()
-            val content1 = json.encodeToString(serializable1)
-            val content2 = json.encodeToString(serializable2)
+            val content = json.encodeToString(data)
             if (verbose) Tracing.psInfo.printf("[File] %s%n", file)
-            file.writeText(content1 + "\n\n" + content2)
+            file.writeText(content)
         }
     }
 
