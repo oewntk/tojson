@@ -13,7 +13,7 @@ import kotlin.collections.asSequence
 
 class TestJsonModelDataSerialize {
 
-    val json = JsonCodec(jsonMethod = JsonMethod.ANY_SERIALIZER, prettyPrint = true)
+    val json = JsonCodec(jsonMethod = JsonMethod.JSON_ELEMENT, prettyPrint = true)
 
     @Test
     fun testModelSerialization() {

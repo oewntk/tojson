@@ -19,7 +19,7 @@ class ModelConsumer(
     val split: Boolean = true,
     val fileext: String = "json",
     val generated: Boolean = false,
-    val jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
+    val jsonMethod: JsonMethod = JsonMethod.JSON_ELEMENT,
     val prettyPrint: Boolean = true,
     private val verbose: Boolean = false,
 ) : Consumer<Model> {

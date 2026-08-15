@@ -12,7 +12,7 @@ import java.util.function.BiConsumer
  */
 open class ObjectTransformer(
     val mode: SerializationMode = SerializationMode.DATA,
-    jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
+    jsonMethod: JsonMethod = JsonMethod.JSON_ELEMENT,
     prettyPrint: Boolean = true,
     val leaveRedundantRelation: Boolean = false,
 
@@ -30,7 +30,7 @@ open class ObjectTransformer(
 open class ObjectConsumer(
     val ps: PrintStream,
     mode: SerializationMode = SerializationMode.DATA,
-    jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
+    jsonMethod: JsonMethod = JsonMethod.JSON_ELEMENT,
     prettyPrint: Boolean = true,
     leaveRedundantRelation: Boolean = false,
 ) : ObjectTransformer(mode = mode, jsonMethod = jsonMethod, prettyPrint = prettyPrint, leaveRedundantRelation = leaveRedundantRelation), BiConsumer<Any, CoreModel> {

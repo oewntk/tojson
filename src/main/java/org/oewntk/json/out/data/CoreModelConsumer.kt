@@ -20,7 +20,7 @@ class CoreModelConsumer(
     val split: Boolean = true,
     val bag: Boolean = false,
     val fileext: String = "json",
-    jsonMethod: JsonMethod = JsonMethod.ANY_SERIALIZER,
+    jsonMethod: JsonMethod = JsonMethod.JSON_ELEMENT,
     prettyPrint: Boolean = true,
     private val verbose: Boolean = false,
 ) : Consumer<CoreModel> {
