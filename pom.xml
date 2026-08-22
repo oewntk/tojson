@@ -7,7 +7,7 @@
 
     <groupId>io.github.oewntk</groupId>
     <artifactId>tojson</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.0.1</version>
     <name>to_json</name>
     <description>Serialize Wordnet model to JSON file.</description>
     <url>https://github.com/oewntk/tojson</url>
@@ -24,12 +24,12 @@
         <dependency>
             <groupId>io.github.oewntk</groupId>
             <artifactId>model</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>io.github.oewntk</groupId>
             <artifactId>json</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -57,13 +57,13 @@
         <dependency>
             <groupId>io.github.oewntk</groupId>
             <artifactId>fromser</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.github.oewntk</groupId>
             <artifactId>model</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.0.1</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>io.github.oewntk</groupId>
             <artifactId>fromser</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.0.1</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
