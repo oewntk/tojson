@@ -9,7 +9,7 @@ object LibTestData {
         senseKeys = listOf(SenseKey("jest%2:32:00::"), SenseKey("jest%2:29:00::"))
     )
         .apply {
-            pronunciations = setOf(Pronunciation("dʒəʊk", "GB"), Pronunciation("dʒoʊk", "US"))
+            pronunciations = setOf(Pronunciation(PronunciationValue("dʒəʊk"), "GB"), Pronunciation(PronunciationValue("dʒoʊk"), "US"))
         }
 
     val synset = Synset(
