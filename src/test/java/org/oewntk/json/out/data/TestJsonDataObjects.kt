@@ -17,7 +17,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testDummyEmptyLex() {
-        val lex = Lex("jest", "n").apply { senseKeys = mutableListOf() }
+        val lex = Lex(Lemma("jest"), "n").apply { senseKeys = mutableListOf() }
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         LibTestsSerCommon.ps.println(jsonString)
@@ -25,7 +25,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testDummyLex() {
-        val lex = Lex("jest", "n", listOf(SenseKey("jest%1:10:00::"), SenseKey("jest%1:04:00::")))
+        val lex = Lex(Lemma("jest"), "n", listOf(SenseKey("jest%1:10:00::"), SenseKey("jest%1:04:00::")))
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         LibTestsSerCommon.ps.println(jsonString)
@@ -37,7 +37,7 @@ class TestJsonDataObjects {
             SynsetId("77777777-n"),
             SynsetType.N,
             "domain",
-            setOf("member1", "member2"),
+            setOf(Lemma("member1"), Lemma("member2")),
             listOf("definition", "definition2"),
         )
         val serializable: Map<String, Any> = synset.toData()
@@ -91,7 +91,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testLex() {
-        val lex: Lex = LibTestsSerCommon.model.lexResolver1("jest", "n")
+        val lex: Lex = LibTestsSerCommon.model.lexResolver1(Lemma("jest"), "n")
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         LibTestsSerCommon.ps.println(jsonString)
@@ -99,7 +99,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testLexes() {
-        val someLexes = arrayOf("force", "lead", "row", "bow", "galore")
+        val someLexes = arrayOf(Lemma("force"), Lemma("lead"), Lemma("row"), Lemma("bow"), Lemma("galore"))
             .flatMap(LibTestsSerCommon.model.lexResolver)
             .asSequence()
         val serializables: Sequence<Map<String, Any>> = someLexes.map { it.toData() }
