@@ -3,6 +3,9 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <excludeFolder url="file://$MODULE_DIR$/images" />
+      <excludeFolder url="file://$MODULE_DIR$/tojson.iml" />
+      <excludeFolder url="file://$MODULE_DIR$/oewn.info" />
+      <excludeFolder url="file://$MODULE_DIR$/oewn.ser" />
     </content>
   </component>
 </module>

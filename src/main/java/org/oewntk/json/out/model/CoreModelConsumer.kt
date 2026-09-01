@@ -1,7 +1,5 @@
 package org.oewntk.json.out.model
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.oewntk.json.out.Tracing
 import org.oewntk.model.CoreModel
@@ -23,7 +21,6 @@ class CoreModelConsumer(
     private val verbose: Boolean = false,
 ) : Consumer<CoreModel> {
 
-    @OptIn(ExperimentalSerializationApi::class)
     val json = Json {
         if (prettyPrint) {
             this.prettyPrint = true
