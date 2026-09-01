@@ -91,7 +91,7 @@ class TestJsonDataObjects {
 
     @Test
     fun testLex() {
-        val lex: Lex = LibTestsSerCommon.model.lexResolver1(Lemma("jest"), "n")
+        val lex: Lex = LibTestsSerCommon.model.lexResolver1(Lemma("jest"), Key2("n"))
         val serializable: Map<String, Any> = lex.toData()
         val jsonString = json.encodeToString(serializable)
         LibTestsSerCommon.ps.println(jsonString)

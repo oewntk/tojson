@@ -93,7 +93,7 @@ class TestJsonOEWNObjects {
 
     @Test
     fun testLex() {
-        val lex: Lex = LibTestsSerCommon.model.lexResolver1(Lemma("jest"), "n")
+        val lex: Lex = LibTestsSerCommon.model.lexResolver1(Lemma("jest"), Key2("n"))
         val serializable: Map<String, Any> = lex.toOEWNDataValue(LibTestsSerCommon.model.senseResolver)
         val jsonString = json.encodeToString(serializable)
         LibTestsSerCommon.ps.println(jsonString)
